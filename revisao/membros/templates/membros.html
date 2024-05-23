@@ -6,7 +6,33 @@
     <title>Membros</title>
 </head>
 <body>
+    {% if messages %}
+<script>
+    window.onload = function() {
+        {% for message in messages %}
+        alert("{{ message }}");
+        {% endfor %}
+    }
+</script>
+{% endif %}
+
     <h1>Bem-vindo à página dos Membros</h1>
-    <p>Esta é uma resposta gerada a partir da view para a URL "membros/".</p>
+    <p>Lista de Membros</p>
+    <ul>
+        {% for membro in membros %}
+        <li> {{membro.nome}} {{membro.sobrenome}} - Idade {{membro.idade}}
+            
+            {% if membro.idade < 18 %}
+            <strong>MENOR DE IDADE</strong>
+            {% else %}
+            <strong>MAIOR DE IDADE</strong>
+            {% endif %}
+        </li>
+
+        {% empty %}
+        <li> Nenhum registro encontrado! </li>
+        {% endfor %}
+    </ul>
+
 </body>
 </html>
